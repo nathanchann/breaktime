@@ -6,12 +6,34 @@
 //
 
 import SwiftUI
+import ManagedSettings
+import FamilyControls
 
 @main
 struct BreaktimeApp: App {
+    let center = AuthorizationCenter.shared
+    @StateObject var store = ManagedSettingsStore()
+    @State private var isAuthorized = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                if isAuthorized {
+                    ContentView()
+                        .environmentObject(store)
+                } else {
+                    ProgressView("Requesting Permission...")
+                        .task {
+                            do {
+                                try await center.requestAuthorization(for: .individual)
+                                isAuthorized = true
+                            } catch {
+                                print("Authorization failed: \(error.localizedDescription)")
+                                // Handle authorization failure if needed
+                            }
+                        }
+                }
+            }
         }
     }
 }

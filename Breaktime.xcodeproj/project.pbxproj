@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C18DE3992DE811B5000A75F8 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */; };
+		C18DE3A12DE811B5000A75F8 /* BreaktimeMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		C18B98A12DE759420024CA1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +26,60 @@
 			remoteGlobalIDString = C18B98922DE7593F0024CA1A;
 			remoteInfo = Breaktime;
 		};
+		C18DE39F2DE811B5000A75F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18B988B2DE7593F0024CA1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C18DE3952DE811B4000A75F8;
+			remoteInfo = BreaktimeMonitor;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C18DE3A62DE811B5000A75F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C18DE3A12DE811B5000A75F8 /* BreaktimeMonitor.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C18B98932DE7593F0024CA1A /* Breaktime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breaktime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B98A02DE759420024CA1A /* BreaktimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreaktimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18B98AA2DE759420024CA1A /* BreaktimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreaktimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BreaktimeMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C18DE3A22DE811B5000A75F8 /* Exceptions for "BreaktimeMonitor" folder in "BreaktimeMonitor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */;
+		};
+		C18DE3B62DE8217A000A75F8 /* Exceptions for "Breaktime" folder in "BreaktimeMonitor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				CustomFont.swift,
+			);
+			target = C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C18B98952DE7593F0024CA1A /* Breaktime */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C18DE3B62DE8217A000A75F8 /* Exceptions for "Breaktime" folder in "BreaktimeMonitor" target */,
+			);
 			path = Breaktime;
 			sourceTree = "<group>";
 		};
@@ -43,6 +91,14 @@
 		C18B98AD2DE759420024CA1A /* BreaktimeUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = BreaktimeUITests;
+			sourceTree = "<group>";
+		};
+		C18DE39A2DE811B5000A75F8 /* BreaktimeMonitor */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C18DE3A22DE811B5000A75F8 /* Exceptions for "BreaktimeMonitor" folder in "BreaktimeMonitor" target */,
+			);
+			path = BreaktimeMonitor;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +125,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C18DE3932DE811B4000A75F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C18DE3992DE811B5000A75F8 /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +142,8 @@
 				C18B98952DE7593F0024CA1A /* Breaktime */,
 				C18B98A32DE759420024CA1A /* BreaktimeTests */,
 				C18B98AD2DE759420024CA1A /* BreaktimeUITests */,
+				C18DE39A2DE811B5000A75F8 /* BreaktimeMonitor */,
+				C18DE3972DE811B4000A75F8 /* Frameworks */,
 				C18B98942DE7593F0024CA1A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +154,17 @@
 				C18B98932DE7593F0024CA1A /* Breaktime.app */,
 				C18B98A02DE759420024CA1A /* BreaktimeTests.xctest */,
 				C18B98AA2DE759420024CA1A /* BreaktimeUITests.xctest */,
+				C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C18DE3972DE811B4000A75F8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,10 +177,12 @@
 				C18B988F2DE7593F0024CA1A /* Sources */,
 				C18B98902DE7593F0024CA1A /* Frameworks */,
 				C18B98912DE7593F0024CA1A /* Resources */,
+				C18DE3A62DE811B5000A75F8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C18DE3A02DE811B5000A75F8 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C18B98952DE7593F0024CA1A /* Breaktime */,
@@ -163,6 +240,28 @@
 			productReference = C18B98AA2DE759420024CA1A /* BreaktimeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C18DE3A32DE811B5000A75F8 /* Build configuration list for PBXNativeTarget "BreaktimeMonitor" */;
+			buildPhases = (
+				C18DE3922DE811B4000A75F8 /* Sources */,
+				C18DE3932DE811B4000A75F8 /* Frameworks */,
+				C18DE3942DE811B4000A75F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C18DE39A2DE811B5000A75F8 /* BreaktimeMonitor */,
+			);
+			name = BreaktimeMonitor;
+			packageProductDependencies = (
+			);
+			productName = BreaktimeMonitor;
+			productReference = C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +283,9 @@
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = C18B98922DE7593F0024CA1A;
 					};
+					C18DE3952DE811B4000A75F8 = {
+						CreatedOnToolsVersion = 16.3;
+					};
 				};
 			};
 			buildConfigurationList = C18B988E2DE7593F0024CA1A /* Build configuration list for PBXProject "Breaktime" */;
@@ -203,6 +305,7 @@
 				C18B98922DE7593F0024CA1A /* Breaktime */,
 				C18B989F2DE759420024CA1A /* BreaktimeTests */,
 				C18B98A92DE759420024CA1A /* BreaktimeUITests */,
+				C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +326,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C18B98A82DE759420024CA1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C18DE3942DE811B4000A75F8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +363,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C18DE3922DE811B4000A75F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +382,11 @@
 			isa = PBXTargetDependency;
 			target = C18B98922DE7593F0024CA1A /* Breaktime */;
 			targetProxy = C18B98AB2DE759420024CA1A /* PBXContainerItemProxy */;
+		};
+		C18DE3A02DE811B5000A75F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */;
+			targetProxy = C18DE39F2DE811B5000A75F8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -393,8 +515,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Breaktime/Breaktime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -420,8 +544,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Breaktime/Breaktime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -510,6 +636,58 @@
 			};
 			name = Release;
 		};
+		C18DE3A42DE811B5000A75F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BreaktimeMonitor/BreaktimeMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BreaktimeMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BreaktimeMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathan.Breaktime.BreaktimeMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C18DE3A52DE811B5000A75F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BreaktimeMonitor/BreaktimeMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BreaktimeMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BreaktimeMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathan.Breaktime.BreaktimeMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -545,6 +723,15 @@
 			buildConfigurations = (
 				C18B98BB2DE759420024CA1A /* Debug */,
 				C18B98BC2DE759420024CA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C18DE3A32DE811B5000A75F8 /* Build configuration list for PBXNativeTarget "BreaktimeMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C18DE3A42DE811B5000A75F8 /* Debug */,
+				C18DE3A52DE811B5000A75F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
