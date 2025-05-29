@@ -72,12 +72,20 @@
 			);
 			target = C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */;
 		};
+		C18DE3E52DE8A160000A75F8 /* Exceptions for "Breaktime" folder in "Breaktime" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C18B98922DE7593F0024CA1A /* Breaktime */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C18B98952DE7593F0024CA1A /* Breaktime */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				C18DE3E52DE8A160000A75F8 /* Exceptions for "Breaktime" folder in "Breaktime" target */,
 				C18DE3B62DE8217A000A75F8 /* Exceptions for "Breaktime" folder in "BreaktimeMonitor" target */,
 			);
 			path = Breaktime;
@@ -521,6 +529,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Breaktime/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -550,6 +559,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Breaktime/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
