@@ -21,6 +21,7 @@ struct ConfigRestrictionView: View {
     @EnvironmentObject var model: MyModel
     @State private var noAppsAlert = false
     @State private var maxAppsAlert = false
+    
 //    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
 //    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
 //    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
@@ -30,13 +31,7 @@ struct ConfigRestrictionView: View {
         NavigationView {
             ZStack {
                 Color("backgroundColor").edgesIgnoringSafeArea(.all)
-                if(inRestrictionMode) {
-                    restrictionView
-                } else {
-                    baseView
-                    
-                }
-                
+                baseView
             }.onAppear(perform: {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                     if success {
@@ -66,41 +61,6 @@ struct ConfigRestrictionView: View {
             .navigationTitle("Breaktime").bold()
         }
         .navigationViewStyle(.stack)
-    }
-    
-    // Create view that will render when in restriction mode
-    var restrictionView: some View{
-        VStack() {
-            Spacer()
-            VStack {
-                Text("You're Currently in Restriction Mode").customFont(.title)
-                HStack {
-                    Text("Your apps will unlock at").customFont(.subheadline)
-                    Text("\(formatTime(hours: endHour, minutes: endMins))")
-                        .customFont(.subheadline)
-                }
-            }
-            Spacer()
-            Spacer()
-            Text("Restricted Apps + Categories ").customFont(.title3)
-            List {
-                Section {
-//                    ForEach(Array(MyModel.shared.savedSelection)){ entity in
-//                        Text(entity.name ?? "NO NAME")
-//                    }
-                    ForEach(Array(MyModel.shared.selectionToDiscourage.applicationTokens), id: \.self) {token in
-                        HStack {
-                            Label(token).customFont(.body)
-                        }
-                        
-                    }
-                    ForEach(Array(MyModel.shared.selectionToDiscourage.categoryTokens), id: \.self) {token in
-                        Label(token).labelStyle(.iconOnly)
-                    }
-                }
-                
-            }.background(Color(.clear))
-        }.padding()
     }
     
     // Create view that will render when there are no current restrictions
@@ -133,31 +93,51 @@ struct ConfigRestrictionView: View {
             }
             .padding(.bottom, 8)  // optional spacing below the header
             Spacer()
-            Button(action: {
-                if MyModel.shared.selectionToDiscourage.applicationTokens.count == 0 &&
-                    MyModel.shared.selectionToDiscourage.categoryTokens.count == 0 {
-                    noAppsAlert = true
-                    maxAppsAlert = false
-                } else if MyModel.shared.selectionToDiscourage.applicationTokens.count >= 20 {
-                    noAppsAlert = false
-                    maxAppsAlert = true
-                } else {
-                    noAppsAlert = false
-                    maxAppsAlert = false
-                    print("APPS SELECTED : \(MyModel.shared.selectionToDiscourage.applications.count)")
-                    for i in MyModel.shared.selectionToDiscourage.applications {
-                        MyModel.shared.addApp(name: i.localizedDisplayName ?? "Temp")
+            if !inRestrictionMode {
+                Button(action: {
+                    if MyModel.shared.selectionToDiscourage.applicationTokens.count == 0 &&
+                        MyModel.shared.selectionToDiscourage.categoryTokens.count == 0 {
+                        noAppsAlert = true
+                        maxAppsAlert = false
+                    } else if MyModel.shared.selectionToDiscourage.applicationTokens.count >= 20 {
+                        noAppsAlert = false
+                        maxAppsAlert = true
+                    } else {
+                        noAppsAlert = false
+                        maxAppsAlert = false
+                        print("APPS SELECTED : \(MyModel.shared.selectionToDiscourage.applications.count)")
+                        for i in MyModel.shared.selectionToDiscourage.applications {
+                            MyModel.shared.addApp(name: i.localizedDisplayName ?? "Temp")
+                        }
+                        UpdateRestriction.startNow()
+                        inRestrictionMode = true
                     }
-                    StartRestriction.startNow()
+                }) {
+                    Text("Start restricting")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .bold()
+                        .background(Color("buttonColor"))
+                        .foregroundColor(Color("buttonText"))
+                        .cornerRadius(12)
                 }
-            }) {
-                Text("Start restricting")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .bold()
-                    .background(Color("buttonColor"))
-                    .foregroundColor(Color("buttonText"))
-                    .cornerRadius(12)
+            } else {
+                Button(action: {
+                    // Logic to "take a break", i.e. end restriction mode
+                    inRestrictionMode = false
+                    UpdateRestriction.endNow()
+                    // Optionally stop monitoring device activity if needed
+                    // Maybe call DeviceActivityCenter().stopMonitoring(...)
+                    print("Restriction ended, taking a break")
+                }) {
+                    Text("Take a Break")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .bold()
+                        .background(Color("buttonColor"))
+                        .foregroundColor(Color("buttonText"))
+                        .cornerRadius(12)
+                }
             }
         }
         .padding()

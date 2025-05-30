@@ -21,7 +21,7 @@ extension DeviceActivityEvent.Name {
 }
 
 
-class StartRestriction {
+class UpdateRestriction {
     static public func startNow() {
         print("Starting restriction immediately...")
 
@@ -58,6 +58,30 @@ class StartRestriction {
         }
 
         MyModel.shared.setShieldRestrictions()
+    }
+    static public func endNow() {
+        print("Ending restriction...")
+
+        // Stop monitoring device activity
+        let center = DeviceActivityCenter()
+        center.stopMonitoring([.daily])
+        print("Monitoring stopped.")
+    
+        
+        // Possibly update UI state (if you do it here, make sure it's on the main thread)
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(false, forKey: "inRestrictionMode")  // or use AppStorage key
+        }
+        
+        // You can also send a notification to the user that restriction ended
+        let notifCenter = UNUserNotificationCenter.current()
+        let content = UNMutableNotificationContent()
+        content.title = "Screen Break Ended"
+        content.body = "You've exited Restriction Mode. Well done!"
+        content.sound = UNNotificationSound.default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        notifCenter.add(request)
     }
 }
 //
