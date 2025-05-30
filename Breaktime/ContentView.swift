@@ -9,26 +9,25 @@ import SwiftUI
 
 
 struct ContentView: View {
+    @AppStorage("showOnboarding") var showOnboarding = true
+    @AppStorage("firstTime") var firstTime = true
     var body: some View {
         VStack {
             ConfigRestrictionView()
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
         }
-//        .fullScreenCover(isPresented:$showOnboarding){
-//            OnboardingView()
-//        }
-//        .onAppear{
-//            if !showOnboarding{
-//                DispatchQueue
-//                    .main
-//                    .asyncAfter(deadline:.now() + 5){
-//                        launchScreenManager.dismiss()
-//                    }
-//            }
-//
-//        }
+        .fullScreenCover(isPresented:$showOnboarding){
+            OnboardingView()
+        }
+        .onAppear {
+            if firstTime {
+                showOnboarding = true
+                firstTime = false
+            } else {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                    launchScreenManager.dismiss()
+//                }
+            }
+        }
         
     }
 }

@@ -13,14 +13,13 @@ import WidgetKit
 struct ConfigRestrictionView: View {
     @ObservedObject var restrictionModel = MyRestrictionModel()
     @State private var showingRestrictionView = false
-    @State private var showHelp = false
     @State private var scale = 0.1
     @AppStorage("endHour") private var endHour = 0
     @AppStorage("endMins") private var endMins = 0
     @AppStorage("inRestrictionMode") private var inRestrictionMode = false
-    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
-    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
-    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
+//    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
+//    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
+//    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
     
     // Main View for Restrictions page
     var body: some View {
@@ -29,21 +28,9 @@ struct ConfigRestrictionView: View {
                 Color("backgroundColor").edgesIgnoringSafeArea(.all)
                 if(inRestrictionMode) {
                     restrictionView
-                        .blur(radius: showHelp ? 30: 0)
                 } else {
                     baseView
-                        .blur(radius: showHelp ? 30: 0)
                     
-                }
-                
-                if showHelp{
-                    tutorialRestrictions
-                        .scaleEffect(scale)
-                        .onAppear{
-                            withAnimation(.easeInOut(duration: 0.3)) {
-                                scale = 1.1
-                            }
-                        }
                 }
                 
             }.onAppear(perform: {
@@ -72,52 +59,9 @@ struct ConfigRestrictionView: View {
                 // Check current time to see if user was in restriction mode
                 checkForRestrictionMode()
             })
-            .navigationTitle("Breaktime")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button(action: {
-                        showHelp.toggle()
-                        scale = 0.1
-                    }) {
-                        Image(systemName: "questionmark.circle")
-                            .renderingMode(.original)
-                    }
-                }
-                
-            }
+            .navigationTitle("Breaktime").bold()
         }
         .navigationViewStyle(.stack)
-    }
-    
-    var tutorialRestrictions: some View{
-        ZStack{
-            Color(.lightGray).opacity(0.7)
-            VStack(alignment:.center){
-                Text("Restriction mode enables you to designate which applications you wish to impose limitations upon, along with the precise duration of their restricted usage. Subsequently, shields will be deployed to enforce the set restrictions until the expiration of the designated time frame, at which point they will be lifted. Exercise discretion in your selection!")
-                    .customFont(.subheadline)
-                    .multilineTextAlignment(.center)
-                Spacer()
-                    .frame(height:30)
-                Button{
-                    showHelp.toggle()
-                    scale = 0.1
-                }label:{
-                    Text("OK")
-                        .customFont(.headline)
-                        .foregroundColor(.blue.opacity(0.5))
-                        
-                }
-                .frame(width:60, height: 30)
-                .background(Color.white.opacity(0.6))
-                .mask(RoundedRectangle(cornerRadius: 30))
-                .shadow(radius:10)
-            }
-            .padding()
-        }
-        .frame(width:UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.45)
-        .mask(RoundedRectangle(cornerRadius:20))
-        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color("Border"), lineWidth: 2))
-        
     }
     
     // Create view that will render when in restriction mode
@@ -158,13 +102,31 @@ struct ConfigRestrictionView: View {
     // Create view that will render when there are no current restrictions
     var baseView: some View{
         VStack(alignment: .center) {
-            Text("Apps to be Restricted")          .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.title3)                      // Makes font a bit bigger
-                .fontWeight(.medium)
-                .foregroundColor(Color("Subheading"))            // Makes the text grey
+            HStack {
+                Text("Restricted Apps")
+                    .font(.title3)
+                    .fontWeight(.medium)
+                    .foregroundColor(Color("Subheading"))
+                Spacer()  // pushes the button to the right
+                
+                Button(action: {
+                    showingRestrictionView.toggle()
+                }) {
+                    ZStack {
+                        Circle()
+                            .stroke(Color("Subheading"), lineWidth: 1) // Gray border with no fill
+                            .opacity(0.2)
+                            .frame(width: 36, height: 36)       // Adjust size as needed
+                        Image(systemName: "slider.horizontal.3")
+                            .fontWeight(.light)
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+            .padding(.bottom, 8)  // optional spacing below the header
             Spacer()
             Button(action: {showingRestrictionView.toggle()}){
-                Text("Start restriction")                    .frame(maxWidth: .infinity)
+                Text("Start restricting")                    .frame(maxWidth: .infinity)
                     .padding()
                     .bold()
                     .background(Color("buttonColor"))
@@ -185,17 +147,17 @@ struct ConfigRestrictionView: View {
         let minuteComponents = Calendar.current.dateComponents([.minute], from: Date())
         let curMins = minuteComponents.minute ?? 0
 
-        if(curHour > endHour){
-            widgetInRestrictionMode = false
-            inRestrictionMode = false
-            MyModel.shared.deleteAllApps()
-            WidgetCenter.shared.reloadAllTimelines()
-        } else if(curHour == endHour && curMins >= endMins){
-            widgetInRestrictionMode = false
-            inRestrictionMode = false
-            MyModel.shared.deleteAllApps()
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+//        if(curHour > endHour){
+//            widgetInRestrictionMode = false
+//            inRestrictionMode = false
+//            MyModel.shared.deleteAllApps()
+//            WidgetCenter.shared.reloadAllTimelines()
+//        } else if(curHour == endHour && curMins >= endMins){
+//            widgetInRestrictionMode = false
+//            inRestrictionMode = false
+//            MyModel.shared.deleteAllApps()
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
     }
 }
 
