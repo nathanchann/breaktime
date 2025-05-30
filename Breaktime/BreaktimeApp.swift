@@ -13,13 +13,14 @@ import FamilyControls
 struct BreaktimeApp: App {
     let center = AuthorizationCenter.shared
     @StateObject var store = ManagedSettingsStore()
+    @StateObject var model = MyModel.shared
     @State private var isAuthorized = false
     
     var body: some Scene {
         WindowGroup {
             ZStack {
                 if isAuthorized {
-                    ContentView()
+                    ContentView().environmentObject(model)
                         .environmentObject(store)
                 } else {
                     ProgressView("Requesting Permission...")

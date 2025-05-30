@@ -16,7 +16,20 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
         }
-        .padding()
+//        .fullScreenCover(isPresented:$showOnboarding){
+//            OnboardingView()
+//        }
+//        .onAppear{
+//            if !showOnboarding{
+//                DispatchQueue
+//                    .main
+//                    .asyncAfter(deadline:.now() + 5){
+//                        launchScreenManager.dismiss()
+//                    }
+//            }
+//
+//        }
+        
     }
 }
 

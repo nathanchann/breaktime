@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		C18DE3992DE811B5000A75F8 /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */; };
 		C18DE3A12DE811B5000A75F8 /* BreaktimeMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C1AA799E2DE93F8F0063683F /* DeviceActivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */; };
+		C1AA79A62DE93F8F0063683F /* DeviceActivityMonitor.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C1AA799D2DE93F8F0063683F /* DeviceActivityMonitor.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C1AA79AC2DE940E90063683F /* ManagedSettings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AA79AB2DE940E80063683F /* ManagedSettings.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +36,13 @@
 			remoteGlobalIDString = C18DE3952DE811B4000A75F8;
 			remoteInfo = BreaktimeMonitor;
 		};
+		C1AA79A42DE93F8F0063683F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C18B988B2DE7593F0024CA1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C1AA799C2DE93F8F0063683F;
+			remoteInfo = DeviceActivityMonitor;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +52,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				C1AA79A62DE93F8F0063683F /* DeviceActivityMonitor.appex in Embed Foundation Extensions */,
 				C18DE3A12DE811B5000A75F8 /* BreaktimeMonitor.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -55,6 +66,8 @@
 		C18B98AA2DE759420024CA1A /* BreaktimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BreaktimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BreaktimeMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DeviceActivity.framework; path = System/Library/Frameworks/DeviceActivity.framework; sourceTree = SDKROOT; };
+		C1AA799D2DE93F8F0063683F /* DeviceActivityMonitor.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DeviceActivityMonitor.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1AA79AB2DE940E80063683F /* ManagedSettings.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ManagedSettings.framework; path = System/Library/Frameworks/ManagedSettings.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -78,6 +91,13 @@
 				Info.plist,
 			);
 			target = C18B98922DE7593F0024CA1A /* Breaktime */;
+		};
+		C1AA79AA2DE93F8F0063683F /* Exceptions for "DeviceActivityMonitor" folder in "DeviceActivityMonitor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = C1AA799C2DE93F8F0063683F /* DeviceActivityMonitor */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -109,6 +129,14 @@
 			path = BreaktimeMonitor;
 			sourceTree = "<group>";
 		};
+		C1AA799F2DE93F8F0063683F /* DeviceActivityMonitor */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C1AA79AA2DE93F8F0063683F /* Exceptions for "DeviceActivityMonitor" folder in "DeviceActivityMonitor" target */,
+			);
+			path = DeviceActivityMonitor;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1AA79AC2DE940E90063683F /* ManagedSettings.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +170,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1AA799A2DE93F8F0063683F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1AA799E2DE93F8F0063683F /* DeviceActivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -151,6 +188,7 @@
 				C18B98A32DE759420024CA1A /* BreaktimeTests */,
 				C18B98AD2DE759420024CA1A /* BreaktimeUITests */,
 				C18DE39A2DE811B5000A75F8 /* BreaktimeMonitor */,
+				C1AA799F2DE93F8F0063683F /* DeviceActivityMonitor */,
 				C18DE3972DE811B4000A75F8 /* Frameworks */,
 				C18B98942DE7593F0024CA1A /* Products */,
 			);
@@ -163,6 +201,7 @@
 				C18B98A02DE759420024CA1A /* BreaktimeTests.xctest */,
 				C18B98AA2DE759420024CA1A /* BreaktimeUITests.xctest */,
 				C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */,
+				C1AA799D2DE93F8F0063683F /* DeviceActivityMonitor.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +209,7 @@
 		C18DE3972DE811B4000A75F8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C1AA79AB2DE940E80063683F /* ManagedSettings.framework */,
 				C18DE3982DE811B4000A75F8 /* DeviceActivity.framework */,
 			);
 			name = Frameworks;
@@ -191,6 +231,7 @@
 			);
 			dependencies = (
 				C18DE3A02DE811B5000A75F8 /* PBXTargetDependency */,
+				C1AA79A52DE93F8F0063683F /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C18B98952DE7593F0024CA1A /* Breaktime */,
@@ -270,6 +311,28 @@
 			productReference = C18DE3962DE811B4000A75F8 /* BreaktimeMonitor.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		C1AA799C2DE93F8F0063683F /* DeviceActivityMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1AA79A92DE93F8F0063683F /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */;
+			buildPhases = (
+				C1AA79992DE93F8F0063683F /* Sources */,
+				C1AA799A2DE93F8F0063683F /* Frameworks */,
+				C1AA799B2DE93F8F0063683F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C1AA799F2DE93F8F0063683F /* DeviceActivityMonitor */,
+			);
+			name = DeviceActivityMonitor;
+			packageProductDependencies = (
+			);
+			productName = DeviceActivityMonitor;
+			productReference = C1AA799D2DE93F8F0063683F /* DeviceActivityMonitor.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -294,6 +357,9 @@
 					C18DE3952DE811B4000A75F8 = {
 						CreatedOnToolsVersion = 16.3;
 					};
+					C1AA799C2DE93F8F0063683F = {
+						CreatedOnToolsVersion = 16.3;
+					};
 				};
 			};
 			buildConfigurationList = C18B988E2DE7593F0024CA1A /* Build configuration list for PBXProject "Breaktime" */;
@@ -314,6 +380,7 @@
 				C18B989F2DE759420024CA1A /* BreaktimeTests */,
 				C18B98A92DE759420024CA1A /* BreaktimeUITests */,
 				C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */,
+				C1AA799C2DE93F8F0063683F /* DeviceActivityMonitor */,
 			);
 		};
 /* End PBXProject section */
@@ -341,6 +408,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C18DE3942DE811B4000A75F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1AA799B2DE93F8F0063683F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -378,6 +452,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1AA79992DE93F8F0063683F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -395,6 +476,11 @@
 			isa = PBXTargetDependency;
 			target = C18DE3952DE811B4000A75F8 /* BreaktimeMonitor */;
 			targetProxy = C18DE39F2DE811B5000A75F8 /* PBXContainerItemProxy */;
+		};
+		C1AA79A52DE93F8F0063683F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C1AA799C2DE93F8F0063683F /* DeviceActivityMonitor */;
+			targetProxy = C1AA79A42DE93F8F0063683F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -526,7 +612,7 @@
 				CODE_SIGN_ENTITLEMENTS = Breaktime/Breaktime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32B4C5N2DN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Breaktime/Info.plist;
@@ -556,7 +642,7 @@
 				CODE_SIGN_ENTITLEMENTS = Breaktime/Breaktime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 32B4C5N2DN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Breaktime/Info.plist;
@@ -698,6 +784,58 @@
 			};
 			name = Release;
 		};
+		C1AA79A72DE93F8F0063683F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/DeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathan.Breaktime.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C1AA79A82DE93F8F0063683F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = DeviceActivityMonitor/DeviceActivityMonitor.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DeviceActivityMonitor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DeviceActivityMonitor;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nathan.Breaktime.DeviceActivityMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -742,6 +880,15 @@
 			buildConfigurations = (
 				C18DE3A42DE811B5000A75F8 /* Debug */,
 				C18DE3A52DE811B5000A75F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1AA79A92DE93F8F0063683F /* Build configuration list for PBXNativeTarget "DeviceActivityMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1AA79A72DE93F8F0063683F /* Debug */,
+				C1AA79A82DE93F8F0063683F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

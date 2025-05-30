@@ -72,7 +72,7 @@ struct ConfigRestrictionView: View {
                 // Check current time to see if user was in restriction mode
                 checkForRestrictionMode()
             })
-            .navigationTitle("Restrictions")
+            .navigationTitle("Breaktime")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action: {
@@ -158,16 +158,21 @@ struct ConfigRestrictionView: View {
     // Create view that will render when there are no current restrictions
     var baseView: some View{
         VStack(alignment: .center) {
+            Text("Apps to be Restricted")          .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.title3)                      // Makes font a bit bigger
+                .fontWeight(.medium)
+                .foregroundColor(Color("Subheading"))            // Makes the text grey
             Spacer()
-            Text("Need a break from the apps?").customFont(.largeTitle).multilineTextAlignment(.center).bold()
-            Text("Tap to enter Restriction Mode!").customFont(.title3).multilineTextAlignment(.center)
             Button(action: {showingRestrictionView.toggle()}){
-                Image("appLogo").resizable().frame(width: 200, height:200)
-            }.shadow(color: Color("Shadow"), radius: 10)
-                .sheet(isPresented: $showingRestrictionView) {
+                Text("Start restriction")                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .bold()
+                    .background(Color("buttonColor"))
+                    .foregroundColor(Color("buttonText"))
+                    .cornerRadius(12)
+            }.sheet(isPresented: $showingRestrictionView) {
                 RestrictionView(restrictionModel: restrictionModel).presentationDetents([.medium])
             }
-            Spacer()
         }
         .padding()
     }
@@ -224,4 +229,10 @@ class MyRestrictionModel: ObservableObject {
     @Published var endMins = 0
     @Published var startTime = ""
     @Published var endTime = ""
+}
+
+struct ConfigRestrictionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfigRestrictionView()
+    }
 }

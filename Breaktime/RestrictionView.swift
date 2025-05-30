@@ -145,7 +145,7 @@ struct RestrictionView: View {
                     .sheet(isPresented: $isDurationPresented, onDismiss: {
                         
                     }, content: {
-//                        DurationPickerView(restrictionModel: restrictionModel, isDurationPresented: $isDurationPresented, restrictionDuration: $restrictionDuration)
+                        DurationPickerView(restrictionModel: restrictionModel, isDurationPresented: $isDurationPresented, restrictionDuration: $restrictionDuration)
                     })
                 
                 Button {
@@ -164,7 +164,7 @@ struct RestrictionView: View {
                     .sheet(isPresented: $isDiscouragedPresented, onDismiss: {
                         
                     }, content: {
-//                        FamilyPickerView(model: model, isDiscouragedPresented: $isDiscouragedPresented)
+                        FamilyPickerView(model: model, isDiscouragedPresented: $isDiscouragedPresented)
                     })
                 Spacer()
                 if(MyModel.shared.selectionToDiscourage.applicationTokens.count > 0 ){
