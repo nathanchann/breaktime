@@ -7,17 +7,35 @@
 		<key>Breaktime.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<key>BreaktimeMonitor.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>DeviceActivityMonitor.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>C18B98922DE7593F0024CA1A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C18DE3952DE811B4000A75F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1AA799C2DE93F8F0063683F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

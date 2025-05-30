@@ -164,7 +164,7 @@ struct RestrictionView: View {
                     .sheet(isPresented: $isDiscouragedPresented, onDismiss: {
                         
                     }, content: {
-                        FamilyPickerView(model: model, isDiscouragedPresented: $isDiscouragedPresented)
+
                     })
                 Spacer()
                 if(MyModel.shared.selectionToDiscourage.applicationTokens.count > 0 ){

@@ -14,9 +14,13 @@ struct ConfigRestrictionView: View {
     @ObservedObject var restrictionModel = MyRestrictionModel()
     @State private var showingRestrictionView = false
     @State private var scale = 0.1
+    @State private var showFamilyPicker = false
     @AppStorage("endHour") private var endHour = 0
     @AppStorage("endMins") private var endMins = 0
     @AppStorage("inRestrictionMode") private var inRestrictionMode = false
+    @EnvironmentObject var model: MyModel
+    @State private var noAppsAlert = false
+    @State private var maxAppsAlert = false
 //    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
 //    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
 //    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
@@ -110,7 +114,7 @@ struct ConfigRestrictionView: View {
                 Spacer()  // pushes the button to the right
                 
                 Button(action: {
-                    showingRestrictionView.toggle()
+                    showFamilyPicker = true
                 }) {
                     ZStack {
                         Circle()
@@ -122,18 +126,38 @@ struct ConfigRestrictionView: View {
                             .foregroundColor(.black)
                     }
                 }
+                
+                .sheet(isPresented: $showFamilyPicker) {
+                    FamilyPickerView(model: model, isDiscouragedPresented: $showFamilyPicker)
+                }
             }
             .padding(.bottom, 8)  // optional spacing below the header
             Spacer()
-            Button(action: {showingRestrictionView.toggle()}){
-                Text("Start restricting")                    .frame(maxWidth: .infinity)
+            Button(action: {
+                if MyModel.shared.selectionToDiscourage.applicationTokens.count == 0 &&
+                    MyModel.shared.selectionToDiscourage.categoryTokens.count == 0 {
+                    noAppsAlert = true
+                    maxAppsAlert = false
+                } else if MyModel.shared.selectionToDiscourage.applicationTokens.count >= 20 {
+                    noAppsAlert = false
+                    maxAppsAlert = true
+                } else {
+                    noAppsAlert = false
+                    maxAppsAlert = false
+                    print("APPS SELECTED : \(MyModel.shared.selectionToDiscourage.applications.count)")
+                    for i in MyModel.shared.selectionToDiscourage.applications {
+                        MyModel.shared.addApp(name: i.localizedDisplayName ?? "Temp")
+                    }
+                    StartRestriction.startNow()
+                }
+            }) {
+                Text("Start restricting")
+                    .frame(maxWidth: .infinity)
                     .padding()
                     .bold()
                     .background(Color("buttonColor"))
                     .foregroundColor(Color("buttonText"))
                     .cornerRadius(12)
-            }.sheet(isPresented: $showingRestrictionView) {
-                RestrictionView(restrictionModel: restrictionModel).presentationDetents([.medium])
             }
         }
         .padding()
@@ -141,11 +165,11 @@ struct ConfigRestrictionView: View {
     
     // Update Restriction Mode
     func checkForRestrictionMode() -> Void {
-        let hourComponents = Calendar.current.dateComponents([.hour], from: Date())
-        let curHour = hourComponents.hour ?? 0
-        
-        let minuteComponents = Calendar.current.dateComponents([.minute], from: Date())
-        let curMins = minuteComponents.minute ?? 0
+//        let hourComponents = Calendar.current.dateComponents([.hour], from: Date())
+//        let curHour = hourComponents.hour ?? 0
+//        
+//        let minuteComponents = Calendar.current.dateComponents([.minute], from: Date())
+//        let curMins = minuteComponents.minute ?? 0
 
 //        if(curHour > endHour){
 //            widgetInRestrictionMode = false
