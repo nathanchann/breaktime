@@ -22,9 +22,9 @@ struct ConfigRestrictionView: View {
     @State private var noAppsAlert = false
     @State private var maxAppsAlert = false
     
-//    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
-//    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
-//    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
+    //    @AppStorage("widgetEndHour", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndHour = 0
+    //    @AppStorage("widgetEndMins", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetEndMins = 0
+    //    @AppStorage("widgetInRestrictionMode", store: UserDefaults(suiteName:"group.ChristianPichardo.ScreenBreak")) private var widgetInRestrictionMode = false
     
     // Main View for Restrictions page
     var body: some View {
@@ -50,53 +50,91 @@ struct ConfigRestrictionView: View {
                 } else {
                     print("❌ Failed to load Inter-SemiBold")
                 }
-                
-                // Check current time to see if user was in restrictions mode
-               checkForRestrictionMode()
-                
-            }).onDisappear(perform: {
-                // Check current time to see if user was in restriction mode
-                checkForRestrictionMode()
             })
-            .navigationTitle("Breaktime").bold()
         }
         .navigationViewStyle(.stack)
     }
     
-    // Create view that will render when there are no current restrictions
-    var baseView: some View{
-        VStack(alignment: .center) {
-            HStack {
-                Text("Restricted Apps")
-                    .font(.title3)
-                    .fontWeight(.medium)
-                    .foregroundColor(Color("Subheading"))
-                Spacer()  // pushes the button to the right
-                
-                Button(action: {
-                    showFamilyPicker = true
-                }) {
-                    ZStack {
-                        Circle()
-                            .stroke(Color("Subheading"), lineWidth: 1) // Gray border with no fill
-                            .opacity(0.2)
-                            .frame(width: 36, height: 36)       // Adjust size as needed
-                        Image(systemName: "slider.horizontal.3")
-                            .fontWeight(.light)
-                            .foregroundColor(.black)
+    var baseView: some View {
+        VStack {
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text("Restrictions")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.black)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            showFamilyPicker = true
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .stroke(Color("Subheading"), lineWidth: 1)
+                                    .opacity(0.2)
+                                    .frame(width: 36, height: 36)
+                                Image(systemName: "slider.horizontal.3")
+                                    .fontWeight(.light)
+                                    .foregroundColor(.black)
+                            }
+                        }
+                    }
+                    .padding(.top, 20)
+                    .padding(.bottom, 20)
+                    
+                    if model.selectionToDiscourage.applicationTokens.isEmpty &&
+                        model.selectionToDiscourage.categoryTokens.isEmpty {
+                        Text("No apps selected.")
+                            .foregroundColor(.gray)
+                            .italic()
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding()
+                    } else if !model.selectionToDiscourage.categoryTokens.isEmpty {
+                        Text("Restricted Categories")
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .foregroundColor(Color("Subheading"))
+                        
+                        ForEach(Array(model.selectionToDiscourage.categoryTokens), id: \.self) { token in
+                            Label(token)
+                                .font(.system(size: 14))
+                                .imageScale(.small)
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                )
+                        }
+                    } else if !model.selectionToDiscourage.applicationTokens.isEmpty {
+                        Text("Restricted Apps")
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .foregroundColor(Color("Subheading"))
+                        
+                        ForEach(Array(model.selectionToDiscourage.applicationTokens), id: \.self) { token in
+                            Label(token)
+                                .font(.system(size: 14))
+                                .imageScale(.small)
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                                )
+                        }
                     }
                 }
-                
-                .sheet(isPresented: $showFamilyPicker) {
-                    FamilyPickerView(model: model, isDiscouragedPresented: $showFamilyPicker)
-                }
+                .padding(.bottom, 80) // add padding so content is not hidden behind button
             }
-            .padding(.bottom, 8)  // optional spacing below the header
-            Spacer()
+            
+            // Fixed button at bottom
             if !inRestrictionMode {
                 Button(action: {
-                    if MyModel.shared.selectionToDiscourage.applicationTokens.count == 0 &&
-                        MyModel.shared.selectionToDiscourage.categoryTokens.count == 0 {
+                    if MyModel.shared.selectionToDiscourage.applicationTokens.isEmpty &&
+                        MyModel.shared.selectionToDiscourage.categoryTokens.isEmpty {
                         noAppsAlert = true
                         maxAppsAlert = false
                     } else if MyModel.shared.selectionToDiscourage.applicationTokens.count >= 20 {
@@ -105,7 +143,6 @@ struct ConfigRestrictionView: View {
                     } else {
                         noAppsAlert = false
                         maxAppsAlert = false
-                        print("APPS SELECTED : \(MyModel.shared.selectionToDiscourage.applications.count)")
                         for i in MyModel.shared.selectionToDiscourage.applications {
                             MyModel.shared.addApp(name: i.localizedDisplayName ?? "Temp")
                         }
@@ -121,14 +158,12 @@ struct ConfigRestrictionView: View {
                         .foregroundColor(Color("buttonText"))
                         .cornerRadius(12)
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
             } else {
                 Button(action: {
-                    // Logic to "take a break", i.e. end restriction mode
                     inRestrictionMode = false
                     UpdateRestriction.endNow()
-                    // Optionally stop monitoring device activity if needed
-                    // Maybe call DeviceActivityCenter().stopMonitoring(...)
-                    print("Restriction ended, taking a break")
                 }) {
                     Text("Take a Break")
                         .frame(maxWidth: .infinity)
@@ -138,30 +173,14 @@ struct ConfigRestrictionView: View {
                         .foregroundColor(Color("buttonText"))
                         .cornerRadius(12)
                 }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
             }
         }
         .padding()
-    }
-    
-    // Update Restriction Mode
-    func checkForRestrictionMode() -> Void {
-//        let hourComponents = Calendar.current.dateComponents([.hour], from: Date())
-//        let curHour = hourComponents.hour ?? 0
-//        
-//        let minuteComponents = Calendar.current.dateComponents([.minute], from: Date())
-//        let curMins = minuteComponents.minute ?? 0
-
-//        if(curHour > endHour){
-//            widgetInRestrictionMode = false
-//            inRestrictionMode = false
-//            MyModel.shared.deleteAllApps()
-//            WidgetCenter.shared.reloadAllTimelines()
-//        } else if(curHour == endHour && curMins >= endMins){
-//            widgetInRestrictionMode = false
-//            inRestrictionMode = false
-//            MyModel.shared.deleteAllApps()
-//            WidgetCenter.shared.reloadAllTimelines()
-//        }
+        .sheet(isPresented: $showFamilyPicker) {
+            FamilyPickerView(model: model, isDiscouragedPresented: $showFamilyPicker)
+        }
     }
 }
 

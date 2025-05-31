@@ -41,14 +41,20 @@ class MyModel: ObservableObject {
         let request = NSFetchRequest<AppEntity>(entityName: "AppEntity")
         do{
             savedSelection = try container.viewContext.fetch(request)
+            print("Fetched apps from Core Data:")
+            for app in savedSelection {
+                print("- \(app.name ?? "Unknown")")
+            }
         }catch let error{
             print("Error fetching. \(error)")
         }
     }
     
     func addApp(name: String){
+        print("Adding app with name: \(name)")  // Debug print
         let newApp = AppEntity(context: container.viewContext)
         newApp.name = name
+        savedSelection.append(newApp)  // Add the new app immediately to update UI
         saveData()
     }
     
@@ -75,7 +81,31 @@ class MyModel: ObservableObject {
     
     func setShieldRestrictions() {
         // Pull the selection out of the app's model and configure the application shield restriction accordingly
+        print("Setting restriction")
         let applications = MyModel.shared.selectionToDiscourage
+        
+//        for token in applications.applicationTokens {
+//            print("App token: \(token)")
+//            if let app = store.application(for: token),
+//               let name = app.localizedDisplayName {
+//                addApp(name: name)
+//            } else {
+//                print("Could not resolve app for token.")
+//            }
+//        }
+//
+//        for categoryToken in applications.categoryTokens {
+//            print("Category token: \(categoryToken)")
+//            let categoryName = categoryToken.rawValue.capitalized
+//            addApp(name: "Category: \(categoryName)")
+//        }
+        
+//        for token in applications.applicationTokens {
+//            print("App token: \(token)")
+//        }
+//        for token in applications.categoryTokens {
+//            print("Category token: \(token)")
+//        }
         store.shield.applications = applications.applicationTokens.isEmpty ? nil : applications.applicationTokens
         store.shield.applicationCategories = applications.categoryTokens.isEmpty
         ? nil
